@@ -9,7 +9,7 @@
   <artifactId>spotify-web-api-java</artifactId>
   <version>7.0.0</version>
   <!--
-   DO NOT FORGET
+   DO NOT FORGET - THIS IS A TEST
    - to update version numbers in README (2x)
    - to update the Javadoc by deleting the docs folder and recreating it
   -->
