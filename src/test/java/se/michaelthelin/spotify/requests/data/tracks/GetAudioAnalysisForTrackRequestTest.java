@@ -1,12 +1,10 @@
 package se.michaelthelin.spotify.requests.data.tracks;
 
 import org.apache.hc.core5.http.ParseException;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
 import se.michaelthelin.spotify.ITest;
 import se.michaelthelin.spotify.TestUtil;
+import se.michaelthelin.spotify.enums.Modality;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.miscellaneous.AudioAnalysis;
 import se.michaelthelin.spotify.requests.data.AbstractDataTest;
@@ -14,10 +12,9 @@ import se.michaelthelin.spotify.requests.data.AbstractDataTest;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@RunWith(MockitoJUnitRunner.class)
 public class GetAudioAnalysisForTrackRequestTest extends AbstractDataTest<AudioAnalysis> {
   private final GetAudioAnalysisForTrackRequest defaultRequest = ITest.SPOTIFY_API
     .getAudioAnalysisForTrack(ITest.ID_TRACK)
@@ -32,7 +29,7 @@ public class GetAudioAnalysisForTrackRequestTest extends AbstractDataTest<AudioA
   @Test
   public void shouldComplyWithReference() {
     assertHasAuthorizationHeader(defaultRequest);
-    Assert.assertEquals(
+    assertEquals(
       "https://api.spotify.com:443/v1/audio-analysis/01iyCAUm8EvOFqVWYJ3dVX",
       defaultRequest.getUri().toString());
   }
@@ -66,7 +63,10 @@ public class GetAudioAnalysisForTrackRequestTest extends AbstractDataTest<AudioA
       1,
       audioAnalysis.getTatums().length);
     assertNotNull(
-      "",
-      audioAnalysis.getTrack());
+      audioAnalysis.getTrack(),
+      "");
+    assertEquals(
+      Modality.MINOR,
+      audioAnalysis.getTrack().getMode());
   }
 }
